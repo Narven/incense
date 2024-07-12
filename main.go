@@ -1,18 +1,19 @@
 package main
 
 import (
-	"image/color"
 	"log"
 	"os"
 
 	"gioui.org/app"
 	"gioui.org/op"
-	"gioui.org/text"
+	"gioui.org/unit"
 	"gioui.org/widget/material"
+	"github.com/Narven/incense/ui"
 )
 
 func main() {
 	go func() {
+		app.Size(unit.Dp(400), unit.Dp(600))
 		window := new(app.Window)
 		err := run(window)
 		if err != nil {
@@ -34,18 +35,12 @@ func run(window *app.Window) error {
 			// This graphics context is used for managing the rendering state.
 			gtx := app.NewContext(&ops, e)
 
-			// Define an large label with an appropriate text:
-			title := material.H1(theme, "Hello, Incense")
+			u := ui.UI{
+				Gtx:   gtx,
+				Theme: theme,
+			}
 
-			// Change the color of the label.
-			maroon := color.NRGBA{R: 127, G: 0, B: 0, A: 255}
-			title.Color = maroon
-
-			// Change the position of the label.
-			title.Alignment = text.Middle
-
-			// Draw the label to the graphics context.
-			title.Layout(gtx)
+			u.Text("Hello Incense")
 
 			// Pass the drawing operations to the GPU.
 			e.Frame(gtx.Ops)
