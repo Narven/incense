@@ -1,5 +1,7 @@
 version: 2
 
+force_token: github
+
 before:
   hooks:
     # You may remove this if you don't use go modules.
@@ -9,9 +11,9 @@ before:
 
 builds:
   - env:
-      - CGO_ENABLED=0
+      - CGO_ENABLED=1
     goos:
-      - linux
+      # - linux
       - windows
       - darwin
 
